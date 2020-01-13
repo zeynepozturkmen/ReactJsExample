@@ -1,11 +1,23 @@
 import React from 'react';
-import './App.css';
+import Navi from './Navi'
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
+import {Container,Row} from 'reactstrap';
 
 function App() {
   return (
     <div>
-      <h3>Hello from React!!!</h3>
+      <Container>
+        <Row>
+<Navi></Navi>
+        </Row>
+        <Row>
+        <CategoryList></CategoryList>
+    <ProductList></ProductList>
+        </Row>
+        </Container>
     </div>
+ 
   );
 }
 
