@@ -5,7 +5,11 @@ import ProductList from './ProductList';
 import {Container,Row,Col} from 'reactstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+//title = ile props oluşturuldu.Yani App.js'den CategoryList.js'e read only veri akışı sağlandı.
+
 function App() {
+  let productInfo={title:"ProductList",baskaBiSey:"bisey"}
+  let categoryInfo={title:"CategoryList"}
   return (
     <div>
       <Container>
@@ -13,11 +17,11 @@ function App() {
 <Navi></Navi>
         </Row>
         <Row>
-          <Col xs="3">
-          <CategoryList></CategoryList>
+          <Col xs="3">        
+          <CategoryList info={categoryInfo}></CategoryList>
           </Col> 
           <Col xs="9">
-          <ProductList></ProductList>
+          <ProductList info={productInfo}></ProductList>
           </Col>       
         </Row>
         </Container>
