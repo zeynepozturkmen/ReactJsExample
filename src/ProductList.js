@@ -4,8 +4,7 @@ export default class  extends Component {
     render() {
         return (
             <div>
-                <h3>{this.props.info.title}</h3>
-                <h3>{this.props.info.baskaBiSey}</h3>
+    <h3>{this.props.info.title}-{this.props.currentCategory}</h3>
             </div>
         )
     }
