@@ -9,7 +9,15 @@ export default class CategoryList extends Component {
             {categoryId:2,categoryName:"Condinents"},
             ],
         };
-  
+  //komponentlerin sayfaya yerleşmesini sağlıyor
+        componentDidMount(){
+            this.getCategories();
+        }
+
+        getCategories=()=>{
+            fetch("http://localhost:3000/categories").then(response=>response.json()).then(data=>this.setState({categories:data}));;
+        }
+
     render() {
         //this kelimesi=CategoryList'e denk geliyor.
   return (
@@ -20,7 +28,7 @@ export default class CategoryList extends Component {
     <ListGroup>
      {
          this.state.categories.map(category=>(
-         <ListGroupItem onClick={()=>this.props.changeCategory(category)} key={category.categoryId}>{category.categoryName}</ListGroupItem>          
+         <ListGroupItem onClick={()=>this.props.changeCategory(category)} key={category.id}>{category.categoryName}</ListGroupItem>          
          ))
      }
     </ListGroup>
