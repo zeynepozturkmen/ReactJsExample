@@ -33,8 +33,14 @@ export default class App extends Component {
   //sepete ekleme işlemi
   addToChart = product => {
     let newChart = this.state.cart;
-    //var addedItem=newChart.find(c=>c.product.id===product.id)
-    newChart.push({ product: product, quantity: 1 });
+    var addedItem=newChart.find(c=>c.product.id===product.id)
+    //eger sepette o ürün daha önceden varsda eklenmiyor
+    if(addedItem){
+      addedItem.quantity +=1;
+    }
+    else{
+      newChart.push({ product: product, quantity: 1 });
+    }
     this.setState({ cart: newChart });
   };
 
@@ -46,7 +52,6 @@ export default class App extends Component {
       <div>
         <Container>
           <Navi cart={this.state.cart} />
-
           <Row>
             <Col xs="3">
               <CategoryList
