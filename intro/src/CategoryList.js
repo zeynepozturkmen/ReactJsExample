@@ -9,7 +9,7 @@ export default class CategoryList extends Component {
             {categoryId:2,categoryName:"Condinents"},
             ],
         };
-  //komponentlerin sayfaya yerleşmesini sağlıyor
+  //componentlerin sayfaya yerleşmesini sağlıyor
         componentDidMount(){
             this.getCategories();
         }
