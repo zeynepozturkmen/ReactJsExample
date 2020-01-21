@@ -4,7 +4,10 @@ import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import  alertify from 'alertifyjs';
+import alertify from "alertifyjs";
+import { Switch, Route } from "react-router-dom";
+import NotFound from "./NotFound";
+import CartList from "./CartList";
 
 //title = ile props oluşturuldu.Yani App.js'den CategoryList.js'e read only veri akışı sağlandı.
 
@@ -34,26 +37,25 @@ export default class App extends Component {
   //sepete ekleme işlemi
   addToChart = product => {
     let newChart = this.state.cart;
-    var addedItem=newChart.find(c=>c.product.id===product.id)
+    var addedItem = newChart.find(c => c.product.id === product.id);
     //eger sepette o ürün daha önceden varsda eklenmiyor
-    if(addedItem){
-      addedItem.quantity +=1;
-    }
-    else{
+    if (addedItem) {
+      addedItem.quantity += 1;
+    } else {
       newChart.push({ product: product, quantity: 1 });
     }
     this.setState({ cart: newChart });
-    alertify.success(product.productName + " added to cart!",2); //parametre olarak uyarı msjı 2 sn kalsın diye yazıyoruz
+    alertify.success(product.productName + " added to cart!", 2); //parametre olarak uyarı msjı 2 sn kalsın diye yazıyoruz
   };
 
   //Sepetten ürün çıkarma
-  removeFromCart=(product)=>{
-    let newChart=this.state.cart.filter(c=>c.product.id !== product.id);
-    this.setState({cart:newChart});
-  }
+  removeFromCart = product => {
+    let newChart = this.state.cart.filter(c => c.product.id !== product.id);
+    this.setState({ cart: newChart });
+  };
 
   render() {
-    let productInfo = { title: "ProductList"};
+    let productInfo = { title: "ProductList" };
     let categoryInfo = { title: "CategoryList" };
     //this kelimesi=CategoryList'e denk geliyor.
     return (
@@ -69,12 +71,23 @@ export default class App extends Component {
               ></CategoryList>
             </Col>
             <Col xs="9">
-              <ProductList
-                products={this.state.products}
-                addToChart={this.addToChart}
-                currentCategory={this.state.currentCategory}
-                info={productInfo}
-              />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <ProductList
+                    {...props}
+                      products={this.state.products}
+                      addToChart={this.addToChart}
+                      currentCategory={this.state.currentCategory}
+                      info={productInfo}
+                    />
+                  )}
+                />
+                <Route exact path="/cart" component={CartList} />
+                <Route component={NotFound} />
+              </Switch>
             </Col>
           </Row>
         </Container>
