@@ -4,6 +4,7 @@ import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import  alertify from 'alertifyjs';
 
 //title = ile props oluşturuldu.Yani App.js'den CategoryList.js'e read only veri akışı sağlandı.
 
@@ -42,16 +43,23 @@ export default class App extends Component {
       newChart.push({ product: product, quantity: 1 });
     }
     this.setState({ cart: newChart });
+    alertify.success(product.productName + " added to cart!",2); //parametre olarak uyarı msjı 2 sn kalsın diye yazıyoruz
   };
 
+  //Sepetten ürün çıkarma
+  removeFromCart=(product)=>{
+    let newChart=this.state.cart.filter(c=>c.product.id !== product.id);
+    this.setState({cart:newChart});
+  }
+
   render() {
-    let productInfo = { title: "ProductList", baskaBiSey: "bisey" };
+    let productInfo = { title: "ProductList"};
     let categoryInfo = { title: "CategoryList" };
     //this kelimesi=CategoryList'e denk geliyor.
     return (
       <div>
         <Container>
-          <Navi cart={this.state.cart} />
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart} />
           <Row>
             <Col xs="3">
               <CategoryList

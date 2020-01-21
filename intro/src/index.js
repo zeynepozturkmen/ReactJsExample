@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import '../node_modules/alertifyjs/build/css/alertify.min.css';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
